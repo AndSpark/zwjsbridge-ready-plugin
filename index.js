@@ -45,31 +45,33 @@ class ZWJSBridgeReadyPlugin {
 
 	zwScript = scripts => `
 <script>
-${this.serviceCode && this.toTicket()}
-var sUserAgent = window.navigator.userAgent.toLowerCase()
-var isAlipay = sUserAgent.indexOf('miniprogram') > -1 && sUserAgent.indexOf('alipay') > -1
-const loadScripts = () => {
-	${scripts}.forEach(v => {
-		const script = document.createElement('script')
-		script.type = 'text/javascript'
-		script.src = v
-		script.defer = true
-		document.getElementsByTagName('head')[0].appendChild(script)
-	}) 
-}
-if(isAlipay) {
-	${this.loading ? `ZWJSBridge.showPreloader()` : ''}
-	ZWJSBridge.onReady(() => {
-		console.log('zwjs ready')   
+(function(){
+	${this.serviceCode && this.toTicket()}
+	var sUserAgent = window.navigator.userAgent.toLowerCase()
+	var isAlipay = sUserAgent.indexOf('miniprogram') > -1 && sUserAgent.indexOf('alipay') > -1
+	const loadScripts = () => {
+		${scripts}.forEach(v => {
+			const script = document.createElement('script')
+			script.type = 'text/javascript'
+			script.src = v
+			script.defer = true
+			document.getElementsByTagName('head')[0].appendChild(script)
+		}) 
+	}
+	if(isAlipay) {
+		${this.loading ? `ZWJSBridge.showPreloader()` : ''}
+		ZWJSBridge.onReady(() => {
+			console.log('zwjs ready')   
+			loadScripts()
+			${this.loading ? `ZWJSBridge.hidePreloader()` : ''}
+		}) 
+	} else {
 		loadScripts()
-		${this.loading ? `ZWJSBridge.hidePreloader()` : ''}
-	}) 
-} else {
-	loadScripts()
-	ZWJSBridge.onReady(() => {
-		console.log('zwjs ready') 
-	}) 
-}
+		ZWJSBridge.onReady(() => {
+			console.log('zwjs ready') 
+		}) 
+	}
+})()
 </script>
 `
 
