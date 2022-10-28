@@ -1,5 +1,4 @@
 const cheerio = require('cheerio')
-const minify = require('html-minifier').minify
 
 class ZWJSBridgeReadyPlugin {
 	ignore = []
@@ -33,7 +32,7 @@ class ZWJSBridgeReadyPlugin {
 						})
 						.remove()
 					$('head').append(this.zwScript(JSON.stringify(scripts)))
-					const result = minify($.html())
+					const result = $.html()
 					assets[key] = {
 						source: () => result,
 						size: () => result.length,
