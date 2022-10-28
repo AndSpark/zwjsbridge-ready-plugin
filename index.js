@@ -93,7 +93,7 @@ class ZWJSBridgeReadyPlugin {
 		replaceLocation = \`https://puser.zjzwfw.gov.cn/sso/mobile.do?action=oauth&scope=1&\` + params
 	}
 	location.replace(replaceLocation)	
-}){}
+})()
 		`
 	}
 }
