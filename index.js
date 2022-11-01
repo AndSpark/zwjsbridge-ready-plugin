@@ -1,13 +1,14 @@
 const cheerio = require('cheerio')
 
 class ZWJSBridgeReadyPlugin {
+	defaultIgnore = 'zwjsbridge.js'
 	ignore = []
 	loading = false
 	serviceCode = ''
 	path = '\\'
 
 	constructor(params = {}) {
-		this.ignore = params.ignore || []
+		this.ignore = this.defaultIgnore.concat(params.ignore || [])
 		this.loading = params.loading || false
 		this.serviceCode = params.serviceCode || ''
 		this.path = params.path || '\\'
@@ -24,8 +25,8 @@ class ZWJSBridgeReadyPlugin {
 					const $ = cheerio.load(content)
 					$('script')
 						.filter((i, val) => {
-							const isTarget = /^\.\/(.*?)\.js$/.test(val.attribs.src)
-							if (isTarget && !this.ignore.includes(val.attribs.src)) {
+							const isTarget = /\.js$/.test(val.attribs.src)
+							if (isTarget && !this.ignore.find(v => val.attribs.src.includes(v))) {
 								scripts.push(val.attribs.src)
 								return true
 							}

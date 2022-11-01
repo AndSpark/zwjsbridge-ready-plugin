@@ -1,0 +1,2 @@
+# zwjsbridge-ready-plugin
+该插件可以将打包后的html文件里的script标签在zwjsbridge.onReady后执行，避免出现冲突
