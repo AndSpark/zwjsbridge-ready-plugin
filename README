@@ -1,2 +1,16 @@
 # zwjsbridge-ready-plugin
 该插件可以将打包后的html文件里的script标签在zwjsbridge.onReady后执行，避免出现冲突
+
+
+## 用法
+在webpackchian中，
+```js
+ webpackChain(chain) {
+    chain.plugin('HtmlPlugin').use('zwjsbridge-ready-plugin',[{
+      loading: true, // 如果加载慢可以用loading
+      serviceCode: 'xxxx',  // 用于单点登录
+      path: '#/pages/home/index', // 单点登录跳转
+      ignore:[]  // 需要被忽略的js文件
+    }])
+  },
+``` 
