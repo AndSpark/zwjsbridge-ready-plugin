@@ -78,7 +78,11 @@ class ZWJSBridgeReadyPlugin {
 	if(ticket || isWechat) return 
 	window.addEventListener('pageshow', e => { 
 		if (e.persisted || (window.performance && window.performance.navigation.type == 2)) {
-			ZWJSBridge.close()
+			if(isAlipay) {
+				my.navigateBack()
+			} else {
+				ZWJSBridge.close()
+			}
 		}
 	})
 	const { origin, pathname } = location
