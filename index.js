@@ -1,7 +1,7 @@
 const cheerio = require('cheerio')
 
 class ZWJSBridgeReadyPlugin {
-	defaultIgnore = 'zwjsbridge.js'
+	defaultIgnore = ['zwjsbridge.js']
 	ignore = []
 	loading = false
 	serviceCode = ''
