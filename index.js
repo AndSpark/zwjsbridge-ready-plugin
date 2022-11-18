@@ -52,7 +52,7 @@ class ZWJSBridgeReadyPlugin {
 	const loadScripts = () => {
 		${scripts}.forEach(v => {
 			const script = document.createElement('script')
-			script.type = 'text/javascript'
+			script.type = "text/javascript"
 			script.src = v
 			script.defer = true
 			document.getElementsByTagName('head')[0].appendChild(script)
@@ -83,7 +83,7 @@ class ZWJSBridgeReadyPlugin {
 	})
 	const { origin, pathname } = location
 	let params = \`servicecode=${this.serviceCode}&redirectUrl=\${encodeURIComponent(
-		origin + pathname + '${this.path}',
+		origin + pathname + "${this.path}",
 	)}\`
 	if (location.href.includes('debug=true')) params += '?debug=true'
 	let replaceLocation = \`https://puser.zjzwfw.gov.cn/sso/alipay.do?action=ssoLogin&\` + params
