@@ -5,13 +5,13 @@ class ZWJSBridgeReadyPlugin {
 	ignore = []
 	loading = false
 	serviceCode = ''
-	path = '\\'
+	path = ''
 
 	constructor(params = {}) {
 		this.ignore = this.defaultIgnore.concat(params.ignore || [])
 		this.loading = params.loading || false
 		this.serviceCode = params.serviceCode || ''
-		this.path = params.path || '\\'
+		this.path = params.path || ''
 	}
 
 	apply(compiler) {
