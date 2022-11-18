@@ -49,7 +49,6 @@ class ZWJSBridgeReadyPlugin {
 (function(){
 	${this.serviceCode && this.toTicket()}
 	var sUserAgent = window.navigator.userAgent.toLowerCase()
-	var isAlipay = sUserAgent.indexOf('miniprogram') > -1 && sUserAgent.indexOf('alipay') > -1
 	const loadScripts = () => {
 		${scripts}.forEach(v => {
 			const script = document.createElement('script')
@@ -58,20 +57,13 @@ class ZWJSBridgeReadyPlugin {
 			script.defer = true
 			document.getElementsByTagName('head')[0].appendChild(script)
 		}) 
-	}
-	if(isAlipay) {
-		${this.loading ? `ZWJSBridge.showPreloader()` : ''}
-		ZWJSBridge.onReady(() => {
-			console.log('zwjs ready')   
-			loadScripts()
-			${this.loading ? `ZWJSBridge.hidePreloader()` : ''}
-		}) 
-	} else {
+	} 
+	${this.loading ? `ZWJSBridge.showPreloader()` : ''}
+	ZWJSBridge.onReady(() => {
+		console.log('zwjs ready')   
 		loadScripts()
-		ZWJSBridge.onReady(() => {
-			console.log('zwjs ready') 
-		}) 
-	}
+		${this.loading ? `ZWJSBridge.hidePreloader()` : ''}
+	})  
 })()
 </script>
 `
