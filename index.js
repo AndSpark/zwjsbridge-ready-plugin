@@ -74,7 +74,7 @@ class ZWJSBridgeReadyPlugin {
 	var ua = window.navigator.userAgent.toLowerCase()
 	var isAlipay =  ua.indexOf('miniprogram') > -1 && ua.indexOf('alipay') > -1
 	var isWechat = ua.toLowerCase().indexOf('micromessenger') > -1
-	var ticket = location.toString().match(/ticket=(.*?-ticket)/)?.[1]
+	var ticket = location.toString().match(/ticket=(.*?-ticket)/) && location.toString().match(/ticket=(.*?-ticket)/)[1]
 	if(ticket || isWechat) return 
 	window.addEventListener('pageshow', e => { 
 		if (e.persisted || (window.performance && window.performance.navigation.type == 2)) {
