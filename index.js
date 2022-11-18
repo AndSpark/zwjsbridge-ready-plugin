@@ -76,6 +76,11 @@ class ZWJSBridgeReadyPlugin {
 	var isWechat = ua.toLowerCase().indexOf('micromessenger') > -1
 	var ticket = location.toString().match(/ticket=(.*?-ticket)/)?.[1]
 	if(ticket || isWechat) return 
+	window.addEventListener('pageshow', e => { 
+		if (e.persisted || (window.performance && window.performance.navigation.type == 2)) {
+			ZWJSBridge.close()
+		}
+	})
 	const { origin, pathname } = location
 	let params = \`servicecode=${this.serviceCode}&redirectUrl=\${encodeURIComponent(
 		origin + pathname + '${this.path}',
