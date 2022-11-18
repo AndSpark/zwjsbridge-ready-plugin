@@ -82,13 +82,11 @@ class ZWJSBridgeReadyPlugin {
 		}
 	})
 	const { origin, pathname } = location
-	let params = \`servicecode=${this.serviceCode}&redirectUrl=\${encodeURIComponent(
-		origin + pathname + "${this.path}",
-	)}\`
+	let params = "servicecode=" + "${this.serviceCode}" + "&redirectUrl=" + encodeURIComponent(origin + pathname + "${this.path}")
 	if (location.href.includes('debug=true')) params += '?debug=true'
-	let replaceLocation = \`https://puser.zjzwfw.gov.cn/sso/alipay.do?action=ssoLogin&\` + params
+	let replaceLocation = "https://puser.zjzwfw.gov.cn/sso/alipay.do?action=ssoLogin&" + params
 	if (!isAlipay) {
-		replaceLocation = \`https://puser.zjzwfw.gov.cn/sso/mobile.do?action=oauth&scope=1&\` + params
+		replaceLocation = "https://puser.zjzwfw.gov.cn/sso/mobile.do?action=oauth&scope=1&" + params
 	}
 	location.replace(replaceLocation)	
 })()
